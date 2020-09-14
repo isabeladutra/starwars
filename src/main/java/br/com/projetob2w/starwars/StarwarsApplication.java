@@ -103,11 +103,12 @@ public class StarwarsApplication {
 	            int quantidadeaparicoes = filmes.size();	           
 	            
 	            mapaNomes.put(nome, quantidadeaparicoes);
-	            result = restTemplate.exchange(result.getBody().next, HttpMethod.GET, entity, NextRes.class); 
 	            
-	            planet = restTemplate.getForObject(planet.next, NextRes.class);
 	            
 	            }
+	            
+	            result = restTemplate.exchange(result.getBody().next.replaceAll("http", "https"), HttpMethod.GET, entity, NextRes.class); 
+	         
 	            log.info("Resultado da Chamada REST: " + planet.toString());
 	        };
 	    };
