@@ -89,12 +89,12 @@ public class StarwarsApplication {
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
-			NextRes planet = restTemplate.getForObject("https://swapi.dev/api/planets/?page=2", NextRes.class);
+			NextRes planet = restTemplate.getForObject("https://swapi.dev/api/planets/", NextRes.class);
 			HttpHeaders headers = new HttpHeaders();
 			headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 			HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-			ResponseEntity<NextRes> result = restTemplate.exchange("https://swapi.dev/api/planets/?page=2",
+			ResponseEntity<NextRes> result = restTemplate.exchange("https://swapi.dev/api/planets/",
 					HttpMethod.GET, entity, NextRes.class);
 
 			while (result.getBody().next != null) {
