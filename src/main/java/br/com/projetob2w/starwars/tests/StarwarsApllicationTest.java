@@ -58,6 +58,17 @@ public class StarwarsApllicationTest extends TestCase {
 			}
 
 		}
+	
+	public boolean testaRemoverPlaneta(String id) {
+		StarwarsApplication starwars = new StarwarsApplication();
+		String retorno = starwars.removerPlaneta(id);
+		if (retorno == "Removido com Sucesso!") {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	}
 
 
