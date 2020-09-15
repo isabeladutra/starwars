@@ -40,7 +40,7 @@ public class StarwarsApplication {
 	}
 
 	@GetMapping("/planetas")
-	public List<Planeta> planetas(String name) {
+	public List<Planeta> planetas() {
 		List<Planeta> planet = arquivoService.findAll();
 		for (int i = 0; i < planet.size(); i++) {
 			String nome = planet.get(i).getNome();
