@@ -1,14 +1,23 @@
 package br.com.projetob2w.starwars.tests;
 
 import java.util.List;
-
+import org.junit.Test;
+import static org.junit.Assert.*;
 import br.com.projetob2w.starwars.StarwarsApplication;
+import br.com.projetob2w.starwars.connection.ArquivoRepository;
 import br.com.projetob2w.starwars.connection.Planeta;
 import junit.framework.*;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
 
 public class StarwarsApllicationTest extends TestCase {
-
+	
+	
+     
 	// Testa se a lista de planetas está vazia
+	
+	@Test
 	public boolean testListaDePlanetasVazia() {
 		StarwarsApplication starwars = new StarwarsApplication();
 		List<Planeta> planeta = starwars.planetas();
@@ -21,6 +30,7 @@ public class StarwarsApllicationTest extends TestCase {
 	}
 
 	// Testa se está passando um id
+	@Test
 	public boolean testaBuscaporIdNotNull(String id) {
 		StarwarsApplication starwars = new StarwarsApplication();
 		if (id == null) {
@@ -32,6 +42,7 @@ public class StarwarsApllicationTest extends TestCase {
 	}
 
 	// testa se está adicionando planeta
+	@Test
 	public boolean testaAdicionarPlaneta(String nome, String clima, String terreno) {
 		StarwarsApplication starwars = new StarwarsApplication();
 		String retorno = starwars.adicionarPlaneta(nome, clima, terreno);
@@ -47,7 +58,7 @@ public class StarwarsApllicationTest extends TestCase {
 	// testar criar um planeta com campos null
 
 	// testa se a busca por nome está funcionando
-
+    @Test
 	public boolean testaBuscaPorNome(String nome) {
 		StarwarsApplication starwars = new StarwarsApplication();
 			Planeta retorno = starwars.buscarPorNome(nome);
@@ -59,6 +70,7 @@ public class StarwarsApllicationTest extends TestCase {
 
 		}
 	
+    @Test
 	public boolean testaRemoverPlaneta(String id) {
 		StarwarsApplication starwars = new StarwarsApplication();
 		String retorno = starwars.removerPlaneta(id);
