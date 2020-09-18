@@ -44,8 +44,9 @@ public class StarwarsApllicationTest {
 		retorno.add(planet);
 
 		when(arquivoService.findAll()).thenReturn(retorno);
-		starwars.planetas();
 		starwars.setArquivoService(arquivoService);
+		starwars.planetas();
+		
 
 		Assert.assertNotNull(retorno);
 
