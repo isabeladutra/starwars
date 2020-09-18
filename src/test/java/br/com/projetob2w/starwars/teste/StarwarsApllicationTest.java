@@ -19,7 +19,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
-import org.powermock.api.mockito.PowerMockito;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 public class StarwarsApllicationTest extends TestCase {
