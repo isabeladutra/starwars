@@ -21,7 +21,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
-public class StarwarsApllicationTest extends TestCase {
+public class StarwarsApllicationTest {
 
 
 	private ArquivoService arquivoService = Mockito.mock(ArquivoService.class);
@@ -30,7 +30,6 @@ public class StarwarsApllicationTest extends TestCase {
 	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 	}
-
 
 
 
@@ -46,6 +45,7 @@ public class StarwarsApllicationTest extends TestCase {
 
 		when(arquivoService.findAll()).thenReturn(retorno);
 		starwars.planetas();
+		starwars.setArquivoService(arquivoService);
 
 		Assert.assertNotNull(retorno);
 
