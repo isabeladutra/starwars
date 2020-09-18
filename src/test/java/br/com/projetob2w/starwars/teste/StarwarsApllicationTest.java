@@ -31,6 +31,9 @@ public class StarwarsApllicationTest extends TestCase {
 		MockitoAnnotations.initMocks(this);
 	}
 
+
+
+
 	@Test
 	public void testlistarPlanetas() {
 		StarwarsApplication starwars = new StarwarsApplication();

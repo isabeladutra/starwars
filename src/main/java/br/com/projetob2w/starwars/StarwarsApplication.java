@@ -31,8 +31,18 @@ public class StarwarsApplication {
 
 	@Autowired
 	private ArquivoService arquivoService;
+	
+	public void setArquivoService(ArquivoService arquivoService) {
+		this.arquivoService = arquivoService;
+	}
+
+
 	Map<String, Integer> mapaNomes = new HashMap<String, Integer>();
 
+	public void setMapaNomes(Map<String, Integer> mapaNomes) {
+		this.mapaNomes = mapaNomes;
+	}
+	
 	private static final Logger log = LoggerFactory.getLogger(StarwarsApplication.class);
 
 	public static void main(String[] args) {
