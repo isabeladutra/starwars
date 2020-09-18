@@ -15,6 +15,7 @@ import br.com.projetob2w.starwars.connection.Planeta;
 import junit.framework.*;
 import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.*;
@@ -23,8 +24,8 @@ import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 public class StarwarsApllicationTest extends TestCase {
 
-	@Mock
-	private ArquivoService arquivoService;
+
+	private ArquivoService arquivoService = Mockito.mock(ArquivoService.class);
 
 	@Before
 	public void initMocks() {
