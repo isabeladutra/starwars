@@ -4,7 +4,9 @@ import br.com.projetob2w.starwars.connection.*;
 import br.com.projetob2w.starwars.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,5 +53,85 @@ public class StarwarsApllicationTest {
 		Assert.assertNotNull(retorno);
 
 	}
+	
+	
+	@Test
+	public void testListarComQuantidadeDeAparicoes() {
+		StarwarsApplication starwars = new StarwarsApplication();
 
+		Planeta planet = new Planeta("Terra", "diverso", "diverso");
+		planet.setQuantidadeaparicoes(1);
+		
+		
+		Map<String, Integer> mapa = new HashMap<String, Integer>();
+		mapa.put("Terra", 1);
+		mapa.put("Tatooine", 5);
+		mapa.put("Kamino", 1);
+
+		List<Planeta> retorno = new ArrayList<Planeta>();
+
+		retorno.add(planet);
+
+		when(arquivoService.findAll()).thenReturn(retorno);
+		
+		
+		starwars.setArquivoService(arquivoService);
+		starwars.setMapaNomes(mapa);
+		
+		List<Planeta> lista_retorno = starwars.planetas();
+		
+			Assert.assertTrue(lista_retorno.contains(planet) == true);
+	        
+	}
+	
+	
+	@Test 
+	public void testBuscaPorId() {
+		StarwarsApplication starwars = new StarwarsApplication();
+		String id = "1234";
+		Planeta planet = new Planeta("Terra", "diverso", "diverso");
+		planet.setId(id);
+		planet.setQuantidadeaparicoes(1);
+		
+		Map<String, Integer> mapa = new HashMap<String, Integer>();
+		mapa.put("Terra", 1);
+		mapa.put("Tatooine", 5);
+		mapa.put("Kamino", 1);
+		
+
+		when(arquivoService.findById(id)).thenReturn(planet);
+		starwars.setMapaNomes(mapa);
+		starwars.setArquivoService(arquivoService);
+		Planeta planeta_retornado = starwars.buscarPorId(id);
+		Assert.assertEquals(planet, planeta_retornado);
+		
+	}
+	
+	/*@Test
+	public void testAdicionarPlaneta() {
+		StarwarsApplication starwars = new StarwarsApplication();
+		Planeta planet = new Planeta("Terra", "diverso", "diverso");
+
+		 String retornoadd;
+		List<Planeta> retorno = new ArrayList<Planeta>();
+
+		retorno.add(planet);
+
+		when(arquivoService.findAll()).thenReturn(retorno);
+		starwars.setArquivoService(arquivoService);
+	    retornoadd = starwars.adicionarPlaneta("Alderaan", "temperate", "grasslands, mountains");
+	    	Assert.assertEquals("Sucesso!", retornoadd);
+	    
+	     //testar o retorno com string
+		
+		
+	}
+	
+	@Test
+	public void testRemoverPlaneta() {
+		
+		
+		
+	}
+*/
 }
