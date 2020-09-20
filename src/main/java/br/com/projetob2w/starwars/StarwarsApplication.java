@@ -81,14 +81,27 @@ public class StarwarsApplication {
 
 	@GetMapping("/buscarpornome")
 	public Planeta buscarPorNome(@RequestParam(value = "nome") String nome) {
-		return arquivoService.buscarPorNome(nome);
+		  Planeta planet = arquivoService.buscarPorNome(nome);
+		if ( planet != null) {
+
+			planet.setQuantidadeaparicoes(mapaNomes.get(nome)!= null ? mapaNomes.get(nome) : 0);
+		} 
+
+		
+		return planet;
 
 	}
 
 	@GetMapping("/removerplaneta")
 	public String removerPlaneta(@RequestParam(value = "id") String id) {
-		arquivoService.delete(id);
-		return "Removido com Sucesso!";
+		if(arquivoService.findById(id) != null){
+			arquivoService.delete(id);
+			return "Removido com Sucesso!";
+		}else {
+			return "id inexistente!";
+		}
+		
+		
 	}
 
 	@Bean

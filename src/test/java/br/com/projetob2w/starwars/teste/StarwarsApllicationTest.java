@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
+
 import static org.junit.Assert.*;
 import br.com.projetob2w.starwars.StarwarsApplication;
 import br.com.projetob2w.starwars.connection.ArquivoRepository;
@@ -109,22 +111,15 @@ public class StarwarsApllicationTest {
 	@Test
 	public void testAdicionarPlaneta() {
 		StarwarsApplication starwars = new StarwarsApplication();
-		Planeta planet = new Planeta("Terra", "diverso", "diverso");
 
 		String nome = "Terra";
 		String clima = "diverso";
 		String terreno = "diverso";
 		 String retornoadd;
 		 
-		 Map<String, Integer> mapa = new HashMap<String, Integer>();
-			mapa.put("Terra", 1);
-			mapa.put("Tatooine", 5);
-			mapa.put("Kamino", 1);
-		
-
+	
 		starwars.setArquivoService(arquivoService);
-		starwars.setMapaNomes(mapa);
-	    retornoadd = starwars.adicionarPlaneta("Alderaan", "temperate", "grasslands, mountains");
+	    retornoadd = starwars.adicionarPlaneta(nome, clima, terreno);
 	    	Assert.assertEquals("Sucesso!", retornoadd);
 	    
 	     //testar o retorno com string
@@ -137,34 +132,40 @@ public class StarwarsApllicationTest {
 		StarwarsApplication starwars = new StarwarsApplication();
 		String nome = "Terra";
 		Planeta planet = new Planeta("Terra", "diverso", "diverso");
-		
 		Map<String, Integer> mapa = new HashMap<String, Integer>();
 		mapa.put("Terra", 1);
 		mapa.put("Tatooine", 5);
 		mapa.put("Kamino", 1);
-		when(arquivoService.buscarPorNome(nome)).thenReturn(planet);
 		
+		
+		when(arquivoService.buscarPorNome(nome)).thenReturn(planet);
 		starwars.setMapaNomes(mapa);
 		starwars.setArquivoService(arquivoService);
 		Planeta planeta_retornado = starwars.buscarPorNome(nome);
+		
+		if(planeta_retornado.getQuantidadeaparicoes() == mapa.get(nome)) {
 		Assert.assertEquals(planet, planeta_retornado);
+		}else {
+			Assert.fail();
+		}
 			
 		
 	}
+	
+	
+	
 	
 	@Test
 	public void testRemoverPlaneta () {
 		StarwarsApplication starwars = new StarwarsApplication();
 		String id = "1234";
+		Planeta planet = new Planeta("Terra", "diverso", "diverso");
+		planet.setId(id);
 		
-		Map<String, Integer> mapa = new HashMap<String, Integer>();
-		mapa.put("Terra", 1);
-		mapa.put("Tatooine", 5);
-		mapa.put("Kamino", 1);
-		
-		starwars.setMapaNomes(mapa);
+	
 		starwars.setArquivoService(arquivoService);
 		String retorno ;
+		when(arquivoService.findById(id)).thenReturn(planet);
 		retorno = starwars.removerPlaneta(id);
 		
 		Assert.assertEquals("Removido com Sucesso!", retorno);
@@ -173,5 +174,22 @@ public class StarwarsApllicationTest {
 		
 	}
 	
+	
+	@Test
+	public void testRemoverPlanetaRetornandoIdNulo () {
+		StarwarsApplication starwars = new StarwarsApplication();
+		String id = "1234";
+		
+	
+		starwars.setArquivoService(arquivoService);
+		String retorno ;
+		when(arquivoService.findById(id)).thenReturn(null);
+		retorno = starwars.removerPlaneta(id);
+		
+		Assert.assertEquals("id inexistente!", retorno);
+		
+		
+		
+	}
 
 }
