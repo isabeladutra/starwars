@@ -98,8 +98,7 @@ public class StarwarsApllicationTest {
 		mapa.put("Tatooine", 5);
 		mapa.put("Kamino", 1);
 		
-
-		when(arquivoService.findById(id)).thenReturn(planet);
+        when(arquivoService.findById(id)).thenReturn(planet);
 		starwars.setMapaNomes(mapa);
 		starwars.setArquivoService(arquivoService);
 		Planeta planeta_retornado = starwars.buscarPorId(id);
@@ -107,18 +106,24 @@ public class StarwarsApllicationTest {
 		
 	}
 	
-	/*@Test
+	@Test
 	public void testAdicionarPlaneta() {
 		StarwarsApplication starwars = new StarwarsApplication();
 		Planeta planet = new Planeta("Terra", "diverso", "diverso");
 
+		String nome = "Terra";
+		String clima = "diverso";
+		String terreno = "diverso";
 		 String retornoadd;
-		List<Planeta> retorno = new ArrayList<Planeta>();
+		 
+		 Map<String, Integer> mapa = new HashMap<String, Integer>();
+			mapa.put("Terra", 1);
+			mapa.put("Tatooine", 5);
+			mapa.put("Kamino", 1);
+		
 
-		retorno.add(planet);
-
-		when(arquivoService.findAll()).thenReturn(retorno);
 		starwars.setArquivoService(arquivoService);
+		starwars.setMapaNomes(mapa);
 	    retornoadd = starwars.adicionarPlaneta("Alderaan", "temperate", "grasslands, mountains");
 	    	Assert.assertEquals("Sucesso!", retornoadd);
 	    
@@ -128,10 +133,45 @@ public class StarwarsApllicationTest {
 	}
 	
 	@Test
-	public void testRemoverPlaneta() {
+	public void testBuscaPorNome() {
+		StarwarsApplication starwars = new StarwarsApplication();
+		String nome = "Terra";
+		Planeta planet = new Planeta("Terra", "diverso", "diverso");
+		
+		Map<String, Integer> mapa = new HashMap<String, Integer>();
+		mapa.put("Terra", 1);
+		mapa.put("Tatooine", 5);
+		mapa.put("Kamino", 1);
+		when(arquivoService.buscarPorNome(nome)).thenReturn(planet);
+		
+		starwars.setMapaNomes(mapa);
+		starwars.setArquivoService(arquivoService);
+		Planeta planeta_retornado = starwars.buscarPorNome(nome);
+		Assert.assertEquals(planet, planeta_retornado);
+			
+		
+	}
+	
+	@Test
+	public void testRemoverPlaneta () {
+		StarwarsApplication starwars = new StarwarsApplication();
+		String id = "1234";
+		
+		Map<String, Integer> mapa = new HashMap<String, Integer>();
+		mapa.put("Terra", 1);
+		mapa.put("Tatooine", 5);
+		mapa.put("Kamino", 1);
+		
+		starwars.setMapaNomes(mapa);
+		starwars.setArquivoService(arquivoService);
+		String retorno ;
+		retorno = starwars.removerPlaneta(id);
+		
+		Assert.assertEquals("Removido com Sucesso!", retorno);
 		
 		
 		
 	}
-*/
+	
+
 }
