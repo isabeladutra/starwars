@@ -17,7 +17,7 @@ public class ArquivoService {
     
     public  Planeta buscarPorNome (String nome) {
     	Planeta planeta = new Planeta(nome, null, null);
-    	return arquivoRepository.findOne(Example.of(planeta)).orElse(null);
+    	return arquivoRepository.findByNome(nome);
     	
     }
  

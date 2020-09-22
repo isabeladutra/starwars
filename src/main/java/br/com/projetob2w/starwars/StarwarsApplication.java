@@ -23,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.projetob2w.starwars.connection.*;
+
 
 @SpringBootApplication
 @RestController
@@ -80,15 +84,18 @@ public class StarwarsApplication {
 	}
 
 	@GetMapping("/buscarpornome")
-	public Planeta buscarPorNome(@RequestParam(value = "nome") String nome) {
-		  Planeta planet = arquivoService.buscarPorNome(nome);
-		if ( planet != null) {
-
-			planet.setQuantidadeaparicoes(mapaNomes.get(nome)!= null ? mapaNomes.get(nome) : 0);
-		} 
-
+	public String buscarPorNome(@RequestParam(value = "nome") String nome) throws JsonProcessingException {
+		Planeta planet = arquivoService.buscarPorNome(nome);
+		ObjectMapper objectMapper = new ObjectMapper();
+		if (planet != null) {
+			planet.setQuantidadeaparicoes(mapaNomes.get(nome) != null ? mapaNomes.get(nome) : 0);
+			return objectMapper.writeValueAsString(planet);
+		}else {
+			return objectMapper.writeValueAsString("Planeta inexistente");
+		}
+			
+	
 		
-		return planet;
 
 	}
 

@@ -127,7 +127,7 @@ public class StarwarsApllicationTest {
 		
 	}
 	
-	@Test
+	/*@Test
 	public void testBuscaPorNome() {
 		StarwarsApplication starwars = new StarwarsApplication();
 		String nome = "Terra";
@@ -150,7 +150,7 @@ public class StarwarsApllicationTest {
 		}
 			
 		
-	}
+	}*/
 	
 	
 	
