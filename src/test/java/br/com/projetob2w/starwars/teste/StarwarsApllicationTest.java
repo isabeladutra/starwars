@@ -25,6 +25,8 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 public class StarwarsApllicationTest {
 
 
@@ -127,8 +129,8 @@ public class StarwarsApllicationTest {
 		
 	}
 	
-	/*@Test
-	public void testBuscaPorNome() {
+	@Test
+	public void testBuscaPorNome() throws JsonProcessingException {
 		StarwarsApplication starwars = new StarwarsApplication();
 		String nome = "Terra";
 		Planeta planet = new Planeta("Terra", "diverso", "diverso");
@@ -141,16 +143,16 @@ public class StarwarsApllicationTest {
 		when(arquivoService.buscarPorNome(nome)).thenReturn(planet);
 		starwars.setMapaNomes(mapa);
 		starwars.setArquivoService(arquivoService);
-		Planeta planeta_retornado = starwars.buscarPorNome(nome);
+		String string_retornada = starwars.buscarPorNome(nome);
 		
-		if(planeta_retornado.getQuantidadeaparicoes() == mapa.get(nome)) {
-		Assert.assertEquals(planet, planeta_retornado);
+		if(string_retornada == "Planeta inexistente") {
+		    Assert.fail();
 		}else {
-			Assert.fail();
+			Assert.assertTrue(string_retornada.contains(nome));
 		}
 			
 		
-	}*/
+	}
 	
 	
 	
