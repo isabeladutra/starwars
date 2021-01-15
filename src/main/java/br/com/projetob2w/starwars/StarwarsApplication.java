@@ -19,6 +19,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -75,14 +77,14 @@ public class StarwarsApplication {
 	public Planeta buscarPorId(@RequestParam(value = "id") String id) {
 		return arquivoService.findById(id);
 	}
-
-	@GetMapping("/adicionarplaneta")
+	
+	@RequestMapping(value ="/adicionarplaneta", method = RequestMethod.POST)
 	public String adicionarPlaneta(@RequestParam(value = "nome") String nome,
 			@RequestParam(value = "clima") String clima, @RequestParam(value = "terreno") String terreno) {
 		arquivoService.salvar(nome, clima, terreno);
 		return "Sucesso!";
 	}
-
+	
 	@GetMapping("/buscarpornome")
 	public String buscarPorNome(@RequestParam(value = "nome") String nome) throws JsonProcessingException {
 		Planeta planet = arquivoService.buscarPorNome(nome);
@@ -99,7 +101,7 @@ public class StarwarsApplication {
 
 	}
 
-	@GetMapping("/removerplaneta")
+	@RequestMapping(value ="/removerplaneta", method = RequestMethod.DELETE)
 	public String removerPlaneta(@RequestParam(value = "id") String id) {
 		if(arquivoService.findById(id) != null){
 			arquivoService.delete(id);

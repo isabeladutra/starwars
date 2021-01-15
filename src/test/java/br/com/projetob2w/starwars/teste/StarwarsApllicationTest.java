@@ -51,10 +51,10 @@ public class StarwarsApllicationTest {
 
 		when(arquivoService.findAll()).thenReturn(retorno);
 		starwars.setArquivoService(arquivoService);
-		starwars.planetas();
+		List<Planeta> retorno_metodo= starwars.planetas();
 		
 
-		Assert.assertNotNull(retorno);
+		Assert.assertNotNull(retorno_metodo);
 
 	}
 	
